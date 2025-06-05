@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { IoAddOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { MdOutlineRoomPreferences } from "react-icons/md";
-
+import { LinkNav } from "./LinkNav";
+import { Logout } from "../Login/Logout";
 
 export const Nav = ({ active }) => {
   return (
@@ -13,35 +13,38 @@ export const Nav = ({ active }) => {
     >
       <ul className="flex flex-col gap-4 w-full">
         <li className="w-full">
-          <Link
-            to="/dashboard/profile"
-            className="w-full flex items-center gap-4 border p-4 rounded"
+          <LinkNav
+            href="/dashboard/profile"
+            title="profile"
           >
-            <VscAccount className="text-xl"/>
+            <VscAccount className="text-xl" />
             Profile
-          </Link>
+          </LinkNav>
         </li>
         <li className="w-full">
-          <Link
-            to="/dashboard/deposit/b"
-            className="w-full block border p-4 rounded"
+          <LinkNav
+            href="/dashboard/deposit/b"
+            title="Depósito [B]"
           >
-            Depósito [B]
-          </Link>
+            <MdOutlineRoomPreferences className="text-xl" /> Depósito [B]
+          </LinkNav>
         </li>
         <li className="w-full">
-          <Link
-            to="/dashboard/deposit/c"
-            className="w-full block border p-4 rounded"
+          <LinkNav
+            href="/dashboard/deposit/c"
+            title="Depósito [C]"
           >
+            <MdOutlineRoomPreferences className="text-xl" />
             Depósito [C]
-          </Link>
+          </LinkNav>
         </li>
       </ul>
 
-      <button className="bg-secondary border p-4 rounded text-base cursor-pointer text-white w-full transition-all flex items-center justify-center gap-4 flex-row-reverse hover:bg-highlight">
+      <button className="bg-secondary border p-4 rounded text-base cursor-pointer text-white w-full transition-all flex items-center justify-center gap-4 flex-row-reverse hover:bg-primary" title="Adicionar">
         Adicionar <IoAddOutline className="text-xl border rounded" />
       </button>
+
+      <Logout/>  
     </nav>
   );
 };

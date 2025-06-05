@@ -3,6 +3,7 @@ import Dashboard from "./pages/dashboard";
 import Deposit from "./pages/Deposit";
 import Login from "./pages/Login";
 import { RouteGuard } from "./components/RouteGuard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
               </RouteGuard>
             }
           />
+
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
     </div>
