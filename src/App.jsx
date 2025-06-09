@@ -4,6 +4,7 @@ import Deposit from "./pages/Deposit";
 import Login from "./pages/Login";
 import { RouteGuard } from "./components/RouteGuard";
 import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
             element={
               <RouteGuard isPrivate={false}>
                 <Login />
+              </RouteGuard>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RouteGuard isPrivate={false}>
+                <Register />
               </RouteGuard>
             }
           />

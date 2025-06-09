@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { LoginForm } from "../components/Login/LoginForm";
 import { Loading } from "../components/Loading/Loading";
+import { RegisterForm } from "../components/Login/RegisterForm";
 
-function Login() {
+function Register() {
   const [loading, setLoading] = useState(false);
 
   return loading ? (
     <Loading />
   ) : (
     <div className="w-full h-screen flex justify-center items-center flex-col gap-8 p-4">
-      <h1 className="text-5xl text-secondary">Login</h1>
-      <LoginForm setLoading={setLoading} />
+      <h1 className="text-5xl text-secondary">Registro</h1>
+
+      <RegisterForm setLoading={setLoading} />
     </div>
   );
 }
-export default Login;
+export default Register;

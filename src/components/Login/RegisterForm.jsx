@@ -1,30 +1,27 @@
 import { InputForm } from "./InputForm";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { auth } from "../../services/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 
-export const LoginForm = ({ setLoading }) => {
+export const RegisterForm = ({ setLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [formError, setFormError] = useState("");
-
-  const { login } = useAuth();
-
-  const onSubmit = async ({ email, password }) => {
-    setLoading(true);
-    setFormError("");
-
+  const onSubmit = async ({ name, email, password }) => {
     try {
-      await login(email, password);
+      setLoading(true);
+      const useRegister = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await updateProfile(useRegister.user, { displayName: name });
     } catch (erro) {
-      alert("E-mail ou senha incorretos", erro)
-      setFormError("E-mail ou Senha incorretos!");
-    } finally {
       setLoading(false);
+      console.log("Login inválido:", erro);
     }
   };
 
@@ -33,6 +30,19 @@ export const LoginForm = ({ setLoading }) => {
       className="flex flex-col gap-4 max-w-[600px] w-full p-4 rounded"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <InputForm
+        type="text"
+        placeholder="Nome"
+        label="Nome:"
+        erro={errors.name}
+        register={register("name", {
+          required: "Nome obrigatório!",
+          minLength: {
+            value: 4,
+            message: "Mínimo 4 caracteres",
+          },
+        })}
+      />
       <InputForm
         type="email"
         placeholder="E-mail"
@@ -61,22 +71,19 @@ export const LoginForm = ({ setLoading }) => {
         })}
       />
 
-      <Link to="" className="text-secondary text-base" title="Alterar Senha">
-        Esqueceu a senha?
+      <Link
+        to="/"
+        className="text-secondary text-base"
+        title="Já possui conta?"
+      >
+        Já possui conta?
       </Link>
 
-      {formError && (
-        <>
-          {console.log("renderizou o erro:", formError)}
-          <p className="text-red-600 text-base">{formError}</p>
-        </>
-      )}
-
       <button
-        className="border border-white outline-2 outline-black max-w-[200px] w-full cursor-pointer p-3 rounded bg-secondary text-white text-base"
-        title="Logar"
+        className="border border-white max-w-[200px] w-full cursor-pointer p-3 rounded bg-secondary text-white text-base"
+        title="Registrar"
       >
-        Login
+        Registrar
       </button>
     </form>
   );

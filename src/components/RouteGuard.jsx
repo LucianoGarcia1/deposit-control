@@ -14,4 +14,3 @@ export const RouteGuard = ({ children, isPrivate = false }) => {
 
   return children;
 };
-
