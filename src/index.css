@@ -1,19 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #002f6c;
-  --color-secondary: #0057b7;
-  --color-highlight: #ffc72c;
-  --color-white: #ffffff;
-  --color-black: #222222;
+  --color-primary: #2563eb;    /* Azul profissional (confiança, tecnologia) */
+  --color-secondary: #059669;  /* Verde (controle, estoque, sucesso) */
+  --color-highlight: #facc15;  /* Amarelo (alerta, baixo estoque, atenção) */
+  --color-white: #f9fafb;      /* Branco suave (fundo leve, não agressivo) */
+  --color-black: #111827;      /* Preto azulado (texto forte, elegante) */
 }
+
 
 * {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
-
 body {
   width: 100%;
   min-height: 100vh;

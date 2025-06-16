@@ -5,10 +5,14 @@ import Login from "./pages/Login";
 import { RouteGuard } from "./components/RouteGuard";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div className="w-full min-h-screen flex justify-center">
+      <Toaster position="top-right" />
+
       <div className="2xl:container w-full mx-auto my-0 bg-white">
         <Routes>
           <Route
@@ -27,6 +31,16 @@ function App() {
               </RouteGuard>
             }
           />
+
+          <Route
+            path="/forgot-password"
+            element={
+              <RouteGuard isPrivate={false}>
+                <ForgotPassword />
+              </RouteGuard>
+            }
+          />
+
           <Route
             path="/dashboard"
             element={

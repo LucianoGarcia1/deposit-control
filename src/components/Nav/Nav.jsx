@@ -10,7 +10,7 @@ export const Nav = ({ active }) => {
 
   return (
     <nav
-      className={`max-w-[300px] w-full p-4 bg-white absolute left-0 top-0 bottom-0 transition-transform duration-300 ${
+      className={`max-w-[300px] w-full rounded p-4 bg-white absolute border left-4 top-4 bottom-4 transition-transform duration-300 ${
         active ? "flex flex-col gap-8 opacity-100" : "hidden"
       }`}
     >

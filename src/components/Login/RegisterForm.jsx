@@ -1,15 +1,18 @@
-import { InputForm } from "./InputForm";
+import { InputForm } from "../Input/InputForm";
 import { Link } from "react-router-dom";
 import { auth } from "../../services/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { Button } from "./Button";
 
-export const RegisterForm = ({ setLoading }) => {
+export const RegisterForm = ({ setLoading, isLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async ({ name, email, password }) => {
     try {
       setLoading(true);
@@ -19,9 +22,24 @@ export const RegisterForm = ({ setLoading }) => {
         password
       );
       await updateProfile(useRegister.user, { displayName: name });
+      toast.success("Conta criada com sucesso!");
+
     } catch (erro) {
+      switch (erro.code) {
+        case "auth/email-already-in-use":
+          toast.error("Este e-mail já está cadastrado.");
+          break;
+        case "auth/invalid-email":
+          toast.error("E-mail inválido.");
+          break;
+        case "auth/weak-password":
+          toast.error("A senha precisa ter no mínimo 6 caracteres.");
+          break;
+        default:
+          toast.error("Erro ao criar conta. Tente novamente.");
+      }
+    } finally {
       setLoading(false);
-      console.log("Login inválido:", erro);
     }
   };
 
@@ -73,18 +91,13 @@ export const RegisterForm = ({ setLoading }) => {
 
       <Link
         to="/"
-        className="text-secondary text-base"
+        className="text-secondary text-base transition-all hover:text-red-600"
         title="Já possui conta?"
       >
         Já possui conta?
       </Link>
 
-      <button
-        className="border border-white max-w-[200px] w-full cursor-pointer p-3 rounded bg-secondary text-white text-base"
-        title="Registrar"
-      >
-        Registrar
-      </button>
+      <Button children="Cadastrar" title="Criar conta" isLoading={isLoading} />
     </form>
   );
 };

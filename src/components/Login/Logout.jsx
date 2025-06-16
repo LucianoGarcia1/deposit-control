@@ -2,38 +2,44 @@ import { MdLogout } from "react-icons/md";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Loading } from "../Loading/Loading";
+import { FiLoader } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 export const Logout = () => {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    setIsLoading(true);
     try {
-      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       await logout();
-      setTimeout(() => {
-        navigate("/");
-      }, 400);
+      toast.success("Usuário deslogado.");
+      navigate("/");
     } catch (e) {
-      setLoading(false);
-      console.log("Erro ao fazer logut:", e);
+      console.log(e);
+      toast.error("Erro ao tentar deslogar!");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <button
-      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer hover:border-black hover:text-red-600 transition-all text-black outline-2 outline-black hover:outline-red-600"
+      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer hover:border-red-600 hover:text-red-600 transition-all text-black outline-2 outline-black hover:outline-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
       title="Deslogar"
+      disabled={isLoading}
       onClick={handleLogout}
     >
-      <MdLogout className="text-xl" />
-      Sair
+      {isLoading ? (
+        <FiLoader className="animate-spin text-xl" />
+      ) : (
+        <>
+          <MdLogout className="text-xl" />
+          Sair
+        </>
+      )}
     </button>
   );
 };

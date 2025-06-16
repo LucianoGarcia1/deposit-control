@@ -1,30 +1,38 @@
-import { InputForm } from "./InputForm";
+import { InputForm } from "../Input/InputForm";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { Button } from "./Button";
 
-export const LoginForm = ({ setLoading }) => {
+export const LoginForm = ({ setIsLoading, isLoading }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [formError, setFormError] = useState("");
 
   const { login } = useAuth();
 
   const onSubmit = async ({ email, password }) => {
-    setLoading(true);
-    setFormError("");
+    setIsLoading(true);
 
     try {
       await login(email, password);
+      toast.success("Login realizado com sucesso!");
     } catch (erro) {
-      alert("E-mail ou senha incorretos", erro)
-      setFormError("E-mail ou Senha incorretos!");
+      switch (erro.code) {
+        case "auth/invalid-credential":
+          toast.error("E-mail ou senha incorretos.");
+          break;
+        case "auth/invalid-email":
+          toast.error("E-mail inválido.");
+          break;
+        default:
+          toast.error("Erro ao fazer login. Tente novamente.");
+      }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -61,23 +69,27 @@ export const LoginForm = ({ setLoading }) => {
         })}
       />
 
-      <Link to="" className="text-secondary text-base" title="Alterar Senha">
-        Esqueceu a senha?
-      </Link>
+      <div className="w-full flex justify-between">
+        <Link
+          to="/forgot-password"
+          className="text-secondary text-base transition-all hover:text-red-600"
+          title="Alterar Senha"
+        >
+          Esqueceu a senha?
+        </Link>
 
-      {formError && (
-        <>
-          {console.log("renderizou o erro:", formError)}
-          <p className="text-red-600 text-base">{formError}</p>
-        </>
-      )}
+        <span className="text-base text-black">| ou |</span>
 
-      <button
-        className="border border-white outline-2 outline-black max-w-[200px] w-full cursor-pointer p-3 rounded bg-secondary text-white text-base"
-        title="Logar"
-      >
-        Login
-      </button>
+        <Link
+          to="/register"
+          className="text-secondary text-base transition-all hover:text-red-600"
+          title="Não possui conta?"
+        >
+          Não possui conta?
+        </Link>
+      </div>
+
+      <Button children="Entrar" title="Entrar" isLoading={isLoading} />
     </form>
   );
 };

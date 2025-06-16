@@ -1,0 +1,84 @@
+import { InputForm } from "../Input/InputForm";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { Button } from "../Login/Button";
+
+export const Modal = ({ handleClose, setIsLoading, isLoading }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const handleCreate = async (data) => {
+    setIsLoading(true);
+
+    try {
+      // Aqui você pode integrar com o Firestore
+      console.log(data);
+
+      toast.success("Depósito criado com sucesso!");
+
+      reset(); // Limpa os inputs
+      handleClose(); // Fecha o modal
+    } catch (erro) {
+      console.log(erro);
+      toast.error("Erro ao criar Depósito");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-black">
+          Adicionar Depósito
+        </h2>
+
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit(handleCreate)}
+        >
+          <InputForm
+            type="text"
+            placeholder="Nome"
+            label="Nome:"
+            erro={errors.nome}
+            register={register("nome", {
+              required: "Nome é obrigatório!",
+              minLength: { value: 4, message: "Mínimo 4 caracteres" },
+            })}
+          />
+
+          <InputForm
+            type="text"
+            placeholder="Descrição"
+            label="Descrição:"
+            erro={errors.descricao}
+            register={register("descricao", {
+              required: "Descrição obrigatória!",
+            })}
+          />
+
+          <div className="flex gap-4">
+            <Button
+              children="Cancelar"
+              title="Cancelar"
+              type="button"
+              onClick={handleClose}
+              className="border-black outline-2 outline-secondary max-w-[200px] w-full cursor-pointer p-3 rounded bg-white text-black text-base mt-4 flex items-center justify-center border!"
+            />
+            <Button
+              children="Adicionar"
+              title="Adicionar"
+              type="submit"
+              isLoading={isLoading}
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
