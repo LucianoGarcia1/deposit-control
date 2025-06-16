@@ -3,7 +3,7 @@ import { InputForm } from "../components/Input/InputForm";
 import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../services/firebase";
-import { Button } from "../components/Login/Button";
+import { Button } from "../components/Forms/Button";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 

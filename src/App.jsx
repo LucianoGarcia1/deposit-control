@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard";
 import Deposit from "./pages/Deposit";
 import Login from "./pages/Login";
 import { RouteGuard } from "./components/RouteGuard";

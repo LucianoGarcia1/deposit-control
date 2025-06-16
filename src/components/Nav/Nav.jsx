@@ -2,8 +2,9 @@ import { IoAddOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { MdOutlineRoomPreferences } from "react-icons/md";
 import { LinkNav } from "./LinkNav";
-import { Logout } from "../Login/Logout";
+import { Logout } from "../Forms/Logout";
 import { useAuth } from "../../hooks/useAuth";
+import { Button } from "../Forms/Button";
 
 export const Nav = ({ active }) => {
   const { user } = useAuth();
@@ -36,12 +37,12 @@ export const Nav = ({ active }) => {
         </li>
       </ul>
 
-      <button
+      <Button
         className="bg-secondary border p-4 rounded text-base cursor-pointer text-white w-full transition-all flex items-center justify-center gap-4 flex-row-reverse border-white outline-2 outline-secondary"
         title="Adicionar Depósito"
       >
         Adicionar <IoAddOutline className="text-xl border rounded" />
-      </button>
+      </Button>
 
       <Logout />
     </nav>

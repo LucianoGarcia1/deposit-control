@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LoginForm } from "../components/Login/LoginForm";
+import { LoginForm } from "../components/Forms/LoginForm";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false);

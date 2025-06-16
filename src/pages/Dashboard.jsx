@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Nav } from "../components/Nav/Nav";
 import { Header } from "../components/Header/Header";
-import { Button } from "../components/Login/Button";
 import { Modal } from "../components/Modal/Modal";
+import { IoAddOutline } from "react-icons/io5";
+import { ButtonModal } from "../components/Button/Button_Modal";
 
 function Dashboard() {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -31,12 +32,16 @@ function Dashboard() {
           </h1>
 
           <div className="w-full mt-8">
-            <Button
-              children="Adicionar"
-              title="Criar Depósito"
-              onClick={handleModal}
-            />
+            
           </div>
+
+          <ButtonModal
+            title="Criar Depósito"
+            onClick={handleModal}
+            className="bg-secondary border p-4 rounded text-base cursor-pointer text-white max-w-[75px] w-full transition-all flex items-center justify-center gap-4 border-white outline-2 outline-secondary fixed z-50 bottom-12 right-8"
+          >
+            <IoAddOutline className="text-3xl" />
+          </ButtonModal>
 
           {activeModal && (
             <Modal

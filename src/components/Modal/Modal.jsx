@@ -1,7 +1,7 @@
 import { InputForm } from "../Input/InputForm";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { Button } from "../Login/Button";
+import { Button } from "../Forms/Button";
 
 export const Modal = ({ handleClose, setIsLoading, isLoading }) => {
   const {
@@ -15,13 +15,10 @@ export const Modal = ({ handleClose, setIsLoading, isLoading }) => {
     setIsLoading(true);
 
     try {
-      // Aqui você pode integrar com o Firestore
       console.log(data);
-
       toast.success("Depósito criado com sucesso!");
-
-      reset(); // Limpa os inputs
-      handleClose(); // Fecha o modal
+      reset();
+      handleClose();
     } catch (erro) {
       console.log(erro);
       toast.error("Erro ao criar Depósito");

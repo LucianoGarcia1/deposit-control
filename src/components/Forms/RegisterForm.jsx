@@ -23,7 +23,6 @@ export const RegisterForm = ({ setLoading, isLoading }) => {
       );
       await updateProfile(useRegister.user, { displayName: name });
       toast.success("Conta criada com sucesso!");
-
     } catch (erro) {
       switch (erro.code) {
         case "auth/email-already-in-use":
@@ -89,13 +88,15 @@ export const RegisterForm = ({ setLoading, isLoading }) => {
         })}
       />
 
-      <Link
-        to="/"
-        className="text-secondary text-base transition-all hover:text-red-600"
-        title="Já possui conta?"
-      >
-        Já possui conta?
-      </Link>
+      <div>
+        <Link
+          to="/"
+          className="text-secondary text-base transition-all hover:text-red-600"
+          title="Já possui conta?"
+        >
+          Já possui conta?
+        </Link>
+      </div>
 
       <Button children="Cadastrar" title="Criar conta" isLoading={isLoading} />
     </form>

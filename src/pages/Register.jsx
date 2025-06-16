@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RegisterForm } from "../components/Login/RegisterForm";
+import { RegisterForm } from "../components/Forms/RegisterForm";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,7 +8,7 @@ function Register() {
     <div className="w-full h-screen flex justify-center items-center flex-col gap-8 p-4 bg-white">
       <h1 className="text-5xl text-secondary">Cadastre-se</h1>
 
-      <RegisterForm setLoading={setIsLoading} isLoading={isLoading}/>
+      <RegisterForm setLoading={setIsLoading} isLoading={isLoading} />
     </div>
   );
 }
