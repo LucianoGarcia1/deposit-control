@@ -4,6 +4,7 @@ import { Header } from "../components/Header/Header";
 import { Modal } from "../components/Modal/Modal";
 import { IoAddOutline } from "react-icons/io5";
 import { ButtonModal } from "../components/Button/Button_Modal";
+import { Title } from "../components/Title/Title";
 
 function Dashboard() {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -27,13 +28,9 @@ function Dashboard() {
       <main className="w-full min-h-screen bg-white p-4 flex flex-col gap-8">
         <Header active={activeMenu} handleMenu={handleMenu} />
         <div className="w-full px-4">
-          <h1 className="text-black text-5xl font-bold">
-            Gerenciador de Depósitos
-          </h1>
+          <Title>Gerenciador de Depósitos</Title>
 
-          <div className="w-full mt-8">
-            
-          </div>
+          <div className="w-full mt-8"></div>
 
           <ButtonModal
             title="Criar Depósito"

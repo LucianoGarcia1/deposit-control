@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import { Toaster } from "react-hot-toast";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -49,6 +50,16 @@ function App() {
               </RouteGuard>
             }
           />
+
+          <Route
+            path="/dashboard/profile"
+            element={
+              <RouteGuard isPrivate={true}>
+                <Profile />
+              </RouteGuard>
+            }
+          />
+
           <Route
             path="dashboard/deposit/:id"
             element={
