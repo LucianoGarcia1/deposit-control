@@ -3,11 +3,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563eb;    /* Azul profissional (confiança, tecnologia) */
-  --color-secondary: #059669;  /* Verde (controle, estoque, sucesso) */
-  --color-highlight: #facc15;  /* Amarelo (alerta, baixo estoque, atenção) */
-  --color-white: #f9fafb;      /* Branco suave (fundo leve, não agressivo) */
-  --color-black: #111827;      /* Preto azulado (texto forte, elegante) */
+  --color-primary: #2563eb;
+  --color-secondary: #059669;
+  --color-highlight: #facc15;
+  --color-white: #f9fafb;
+  --color-black: #111827;
+  --breakpoint-sm: 440px;
 }
 
 

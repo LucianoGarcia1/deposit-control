@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Deposit from "./pages/Deposit";
 import Login from "./pages/Login";
-import { RouteGuard } from "./components/RouteGuard";
+import { RouteGuard } from "./routes/RouteGuard";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";

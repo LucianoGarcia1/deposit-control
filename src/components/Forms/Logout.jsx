@@ -27,7 +27,7 @@ export const Logout = () => {
 
   return (
     <button
-      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer hover:border-red-600 hover:text-red-600 transition-all text-black outline-2 outline-black hover:outline-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer hover:border-red-500 hover:text-red-500 transition-all text-black outline-2 outline-black hover:outline-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
       title="Deslogar"
       disabled={isLoading}
       onClick={handleLogout}

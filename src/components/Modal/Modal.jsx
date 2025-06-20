@@ -2,41 +2,66 @@ import { InputForm } from "../Input/InputForm";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Button } from "../Forms/Button";
+import { createDeposit, updateDeposit } from "../../utils/depositFunctions";
+import { useEffect } from "react";
 
-export const Modal = ({ handleClose, setIsLoading, isLoading }) => {
+export const Modal = ({
+  handleClose,
+  setIsLoading,
+  isLoading,
+  depositSelected = null,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
 
-  const handleCreate = async (data) => {
+  useEffect(() => {
+    if (depositSelected) {
+      setValue("nome", depositSelected.name);
+      setValue("descricao", depositSelected.description);
+    } else {
+      reset();
+    }
+  }, [depositSelected, setValue, reset]);
+
+  const handleSave = async ({ nome, descricao }) => {
     setIsLoading(true);
 
     try {
-      console.log(data);
-      toast.success("Depósito criado com sucesso!");
+      if (depositSelected) {
+        await updateDeposit(depositSelected.id, {
+          name: nome,
+          description: descricao,
+        });
+        toast.success("Depósito atualizado com sucesso!");
+      } else {
+        await createDeposit(nome, descricao);
+        toast.success("Depósito criado com sucesso!");
+      }
       reset();
       handleClose();
     } catch (erro) {
       console.log(erro);
-      toast.error("Erro ao criar Depósito");
+      toast.error("Erro ao salvar Depósito");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
       <div className="bg-white p-6 rounded-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-black">
-          Adicionar Depósito
+          {depositSelected ? "Editar Depósito" : "Adicionar Depósito"}
         </h2>
 
         <form
           className="flex flex-col gap-4"
-          onSubmit={handleSubmit(handleCreate)}
+          onSubmit={handleSubmit(handleSave)}
         >
           <InputForm
             type="text"
@@ -68,8 +93,8 @@ export const Modal = ({ handleClose, setIsLoading, isLoading }) => {
               className="border-black outline-2 outline-secondary max-w-[200px] w-full cursor-pointer p-3 rounded bg-white text-black text-base mt-4 flex items-center justify-center border!"
             />
             <Button
-              children="Adicionar"
-              title="Adicionar"
+              children={depositSelected ? "Salvar" : "Adicionar"}
+              title={depositSelected ? "Salvar" : "Adicionar"}
               type="submit"
               isLoading={isLoading}
             />

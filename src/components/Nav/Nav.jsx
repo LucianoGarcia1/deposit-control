@@ -11,19 +11,20 @@ export const Nav = ({ active }) => {
 
   return (
     <nav
-      className={`max-w-[300px] min-h-auto w-full rounded p-4 bg-white absolute border left-4 top-4 bottom-50 transition-transform duration-300 ${
-        active ? "flex flex-col gap-8 opacity-100" : "hidden"
-      }`}
+      className={`fixed z-50 bg-white border cc py-4 px-6 transition-all rounded-tr-4xl rounded-br-4xl ${
+        active ? "left-0 top-0 bottom-0" : "-left-[400px]"
+      } max-w-[300px] w-full flex flex-col gap-8`}
     >
-      <h3 className="text-2xl font-bold text-black">{`Olá, ${user.displayName}!`}</h3>
+      <h3 className="text-2xl font-bold text-black">
+        Olá, {user.displayName}!
+      </h3>
 
-      <ul className="flex flex-col gap-4 w-full">
-        <li className="w-full">
-          <LinkNav href="/dashboard/profile" title="profile">
-            <VscAccount className="text-xl" />
-            Perfil
-          </LinkNav>
-        </li>
+      <ul className="flex flex-col gap-4">
+        <LinkNav href="/dashboard/profile">
+          <VscAccount className="text-xl" />
+          Perfil
+        </LinkNav>
+
         <li className="w-full">
           <LinkNav href="/dashboard/deposit/b" title="Depósito [B]">
             <MdOutlineRoomPreferences className="text-xl" /> Depósito [B]
