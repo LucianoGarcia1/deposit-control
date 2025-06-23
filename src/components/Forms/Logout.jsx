@@ -27,13 +27,16 @@ export const Logout = () => {
 
   return (
     <button
-      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer hover:border-red-500 hover:text-red-500 transition-all text-black outline-2 outline-black hover:outline-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full p-4 border rounded flex justify-center items-center gap-4 text-base cursor-pointer border-red-500 text-red-500 transition-all hover:text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-red-500 bg-transparent"
       title="Deslogar"
       disabled={isLoading}
       onClick={handleLogout}
     >
       {isLoading ? (
-        <FiLoader className="animate-spin text-xl" />
+        <>
+          <FiLoader className="animate-spin text-xl" />
+          Saindo...
+        </>
       ) : (
         <>
           <MdLogout className="text-xl" />

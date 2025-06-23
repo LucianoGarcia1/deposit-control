@@ -6,6 +6,9 @@ import {
   updateDoc,
   deleteDoc,
   onSnapshot,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 
@@ -39,4 +42,12 @@ export const updateDeposit = async (id, data) => {
 export const deleteDeposit = async (id) => {
   const ref = doc(db, "deposits", id);
   await deleteDoc(ref);
+};
+
+export const checkDepositName = async (name) => {
+  const depositsRef = collection(db, "deposits");
+  const q = query(depositsRef, where("name", "==", name));
+  const querySnapshot = await getDocs(q);
+
+  return !querySnapshot.empty;
 };

@@ -2,7 +2,11 @@ import { InputForm } from "../Input/InputForm";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Button } from "../Forms/Button";
-import { createDeposit, updateDeposit } from "../../utils/depositFunctions";
+import {
+  checkDepositName,
+  createDeposit,
+  updateDeposit,
+} from "../../utils/depositFunctions";
 import { useEffect } from "react";
 
 export const Modal = ({
@@ -33,12 +37,26 @@ export const Modal = ({
 
     try {
       if (depositSelected) {
+        const depositExists = await checkDepositName(nome);
+
+        if (depositExists && nome !== depositSelected.name) {
+          toast.error("Já existe um depósito com esse nome.");
+          setIsLoading(false);
+          return;
+        }
+
         await updateDeposit(depositSelected.id, {
           name: nome,
           description: descricao,
         });
         toast.success("Depósito atualizado com sucesso!");
       } else {
+        const depositExists = await checkDepositName(nome);
+        if (depositExists) {
+          toast.error("Já existe um depósito com esse nome.");
+          setIsLoading(false);
+          return;
+        }
         await createDeposit(nome, descricao);
         toast.success("Depósito criado com sucesso!");
       }

@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
-import { deleteDeposit, getDeposits } from "../../utils/depositFunctions";
+import { deleteDeposit } from "../../utils/depositFunctions";
 import { ButtonUpdate } from "../Button/ButtonUpdate";
 import { Link } from "react-router-dom";
 import { ButtonDelete } from "../Button/ButtonDelete";
 import toast from "react-hot-toast";
+import { useMenu } from "../../hooks/useMenu";
 
-export const Deposits = ({ handleEdit }) => {
-  const [dados, setDados] = useState([]);
-  useEffect(() => {
-    const response = getDeposits(setDados);
+export const Deposits = ({ handleEdit, dados }) => {
+  const { activeMenu } = useMenu();
 
-    return () => response();
-  }, []);
   const handleDeleteDeposit = async (id, name) => {
     try {
       await deleteDeposit(id);
@@ -23,11 +19,15 @@ export const Deposits = ({ handleEdit }) => {
 
   if (dados) {
     return (
-      <div className="w-full md:max-w-[750px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div
+        className={`w-full md:max-w-[750px] grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all ${
+          activeMenu ? "md:grid-cols-2 2xl:grid-cols-3" : "md:grid-cols-3"
+        }`}
+      >
         {dados.map((item) => (
           <Link
             key={item.id}
-            className="sm:max-w-[300px] w-full bg-white border rounded-2xl p-4 shadow-md hover:shadow-xl hover:scale-[1.01] transition"
+            className="sm:max-w-[300px] w-full bg-white border rounded-2xl p-4 shadow-md hover:shadow-xl hover:scale-[1.01] transition-all"
             to={`/dashboard/deposit/${item.id}`}
           >
             <div className="flex justify-end items-center gap-4 mb-4">
