@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Nav } from "../components/Nav/Nav";
-import { Header } from "../components/Header/Header";
 import { Modal } from "../components/Modal/Modal";
 import { IoAddOutline } from "react-icons/io5";
 import { ButtonModal } from "../components/Button/Button_Modal";

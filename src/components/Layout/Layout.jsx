@@ -8,9 +8,7 @@ export const Layout = ({ children }) => {
   return (
     <section>
       <section
-        className={`w-full min-h-screen relative transition-all duration-300 bg-white ${
-          activeMenu ? "lg:pl-[300px] 2xl:pl-0" : "pl-0"
-        }`}
+        className={`w-full min-h-screen relative transition-all duration-300 bg-white`}
       >
         {isDesktop ? (
           <>

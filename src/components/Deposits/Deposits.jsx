@@ -3,11 +3,8 @@ import { ButtonUpdate } from "../Button/ButtonUpdate";
 import { Link } from "react-router-dom";
 import { ButtonDelete } from "../Button/ButtonDelete";
 import toast from "react-hot-toast";
-import { useMenu } from "../../hooks/useMenu";
 
 export const Deposits = ({ handleEdit, dados }) => {
-  const { activeMenu } = useMenu();
-
   const handleDeleteDeposit = async (id, name) => {
     try {
       await deleteDeposit(id);
@@ -20,8 +17,7 @@ export const Deposits = ({ handleEdit, dados }) => {
   if (dados) {
     return (
       <div
-        className={`w-full md:max-w-[750px] grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all ${
-          activeMenu ? "md:grid-cols-2 2xl:grid-cols-3" : "md:grid-cols-3"
+        className={`w-full md:max-w-[750px] grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all md:grid-cols-3
         }`}
       >
         {dados.map((item) => (

@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
+import Setup from "./pages/Setup";
 
 function App() {
   return (
@@ -56,6 +57,15 @@ function App() {
             element={
               <RouteGuard isPrivate={true}>
                 <Profile />
+              </RouteGuard>
+            }
+          />
+
+          <Route
+            path="/dashboard/setup"
+            element={
+              <RouteGuard isPrivate={true}>
+                <Setup />
               </RouteGuard>
             }
           />
