@@ -7,9 +7,9 @@ function Setup() {
     <Layout>
       <Title>Base de Dados</Title>
 
-      <div className="w-full flex flex-col sm:flex-row justify-between lg:justify-normal lg:gap-8  mt-4">
+      <div className="w-full flex flex-col md:flex-row justify-between lg:justify-normal gap-4 mt-8">
         <SetupBox title="Equipamentos" />
-        <SetupBox title="Fornecedora" />
+        <SetupBox title="Fornecedoras" />
         <SetupBox title="Setores" />
       </div>
     </Layout>
